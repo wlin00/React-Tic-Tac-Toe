@@ -6,6 +6,7 @@ export interface ISquare {
 export interface IBoard {
   xIsNext: boolean
   squares: string[]
+  currentIndex: number
   onPlay: (list: string[]) => void
 }
 

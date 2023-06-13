@@ -3,6 +3,8 @@ import React from 'react';
 import  './App.scss'
 import { ISquare, IBoard, ITimeTravelListItem } from './interface';
 
+const BOARDSQUARE = 9
+
 // 棋盘中的某个格组件 - props：1、当前展示值'X' or 'O'；2、
 const Square: React.FC<ISquare> = ({ value, onSquareClick }) => {
   return (
@@ -11,9 +13,11 @@ const Square: React.FC<ISquare> = ({ value, onSquareClick }) => {
 }
 
 // 棋盘组件
-const Board: React.FC<IBoard> = ({ xIsNext, squares, onPlay }) => {
+const Board: React.FC<IBoard> = ({ xIsNext, squares, onPlay, currentIndex }) => {
   const winner = caculateWinner(squares)
-  const status = winner ? `Winner is ${winner}` : `Next Player is ${xIsNext ? 'X' : 'O'}` 
+  const status = winner 
+    ? `Winner is ${winner}` 
+    : (currentIndex === BOARDSQUARE ? 'The game ended in a draw' : `Next Player is ${xIsNext ? 'X' : 'O'}`)
   const handleClick = (index: number) => { // 
     if (squares[index] || caculateWinner(squares)) { // 若已经出现胜者，或者当前格已有棋子，则return
       return
@@ -76,7 +80,7 @@ const TimeTravelListItem: React.FC<ITimeTravelListItem> = ({ index, jumpTo })=> 
 
 // APP
 export default function Game() {
-  const [history, setHistory] = useState([new Array(9).fill(null)]) // [ [], [], []... ]
+  const [history, setHistory] = useState([new Array(BOARDSQUARE).fill(null)]) // [ [], [], []... ]
   const [currentIndex, setCurrentIndex] = useState<number>(0)
   const currentSquares = useMemo(() => history[currentIndex], [history, currentIndex])
   // const currentSquares = history[currentIndex]
@@ -104,6 +108,7 @@ export default function Game() {
         <Board 
           xIsNext={isNextStepX} 
           squares={currentSquares} 
+          currentIndex={currentIndex}
           onPlay={handleBoardClick} 
         />
       </div>
