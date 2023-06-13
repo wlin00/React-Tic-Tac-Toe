@@ -8,3 +8,8 @@ export interface IBoard {
   squares: string[]
   onPlay: (list: string[]) => void
 }
+
+export interface ITimeTravelListItem {
+  index: number
+  jumpTo: (index: number) => void
+}
