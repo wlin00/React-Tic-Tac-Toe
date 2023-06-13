@@ -17,7 +17,7 @@ const Board: React.FC<IBoard> = ({ xIsNext, squares, onPlay, currentIndex }) => 
   const winner = caculateWinner(squares)
   const status = winner 
     ? `Winner is ${winner}` 
-    : (currentIndex === BOARDSQUARE ? 'The game ended in a draw' : `Next Player is ${xIsNext ? 'X' : 'O'}`)
+    : (currentIndex === BOARDSQUARE ? 'Ended In A Draw' : `Next Player Is ${xIsNext ? 'X' : 'O'}`)
   const handleClick = (index: number) => { // 
     if (squares[index] || caculateWinner(squares)) { // 若已经出现胜者，或者当前格已有棋子，则return
       return
