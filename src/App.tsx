@@ -1,8 +1,5 @@
 import { useState, useCallback, useMemo } from 'react';
-import React from 'react';
 import  './App.scss'
-import { IBoard } from './interface';
-import Square from './components/Square';
 import TimeTravelListItem from './components/TimeTravelListItem';
 import { BOARDSQUARE } from './enums';
 import Board from './components/Board';
